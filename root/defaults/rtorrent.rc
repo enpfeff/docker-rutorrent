@@ -43,7 +43,7 @@ log.add_output = "info", "rtorrent"
 schedule = socket_chmod,0,0,"execute=chmod,0660,/run/php/.rtorrent.sock"
 schedule = socket_chgrp,0,0,"execute=chgrp,abc,/run/php/.rtorrent.sock"
 
-schedule = watch_directory_1,10,10,"load.start=/downloads/watch/misc/*.torrent,d.custom1.set=/downloads/data/misc"
+schedule = watch_directory_1,10,10,"load.start=/downloads/watch/misc/*.torrent,d.custom1.set=/downloads/misc"
 schedule = watch_directory_2,10,10,"load.start=/downloads/watch/tv/*.torrent,d.custom1.set=/downloads/stagedTv"
 schedule = watch_directory_3,10,10,"load.start=/downloads/watch/movie/*.torrent,d.custom1.set=/downloads/movie"
 
@@ -51,7 +51,7 @@ schedule = watch_directory_3,10,10,"load.start=/downloads/watch/movie/*.torrent,
 schedule = low_diskspace,5,60,close_low_diskspace=100M
 
 method.insert = d.get_data_full_path, simple, "branch=((d.is_multi_file)),((cat,(d.directory))),((cat,(d.directory),/,(d.name)))"
-method.insert = d.move_to_complete, simple, "d.directory.set=$argument.1=; execute=mkdir,-p,$argument.1=; execute=mv,-u,$argument.0=,$argument.1=; d.save_full_session="
+method.insert = d.move_to_complete, simple, "d.directory.set=$argument.1=; execute=mkdir,-p,$argument.1=; execute=mv,-u,$argument.0=,$argument.1=; execute=/usr/bin/notify.sh,$d.custom1=; d.save_full_session="
 method.set_key = event.download.finished,move_complete,"d.move_to_complete=$d.get_data_full_path=,$d.custom1="
 
 # method.set_key = event.download.finished, rtorrent_move, "d.directory.set=$d.custom1=;execute = /opt/rtorrent/script/processDownloadComplete.sh, $d.base_path=, $d.custom1="
