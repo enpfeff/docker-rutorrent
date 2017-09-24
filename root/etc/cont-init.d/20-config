@@ -4,7 +4,8 @@
 mkdir -p \
 	/config{/log/nginx,/log/rtorrent,/log/rutorrent,/nginx,/php,/rtorrent/rtorrent_sess,/rutorrent/settings/users} \
 	/config/rutorrent/profiles{/settings,/torrents,/users,/tmp} \
-	/downloads{/completed,/incoming,/watched} \
+	/downloads{/completed,/incoming,/watch} \
+	/downloads/watch{/movie,/tv,/misc}
 	/run{/nginx,/php} \
 	/var/lib/nginx/tmp/client_body \
 	/var/tmp/nginx
@@ -60,3 +61,5 @@ chown -R abc:abc \
 
 chmod -R 755 /config/rutorrent/profiles
 chmod 644 /etc/logrotate.d/*
+chmod +x /usr/bin/notify.sh
+chmod +x /usr/bin/prowl.sh

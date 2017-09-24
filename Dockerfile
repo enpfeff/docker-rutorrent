@@ -40,6 +40,7 @@ RUN \
 	logrotate \
 	nginx \
 	php7 \
+	openrc \
 	php7-cgi \
 	php7-fpm \
 	php7-json  \
